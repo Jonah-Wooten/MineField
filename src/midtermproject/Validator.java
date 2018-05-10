@@ -25,9 +25,9 @@ public class Validator {
 		while (isValid == false) {
 			i = getInt(sc, prompt);
 			if (i < min)
-				System.out.println("Please enter a valid option.");
+				System.out.println("Please enter a number between " + min + " and " + max + ".");
 			else if (i > max)
-				System.out.println("Please enter a valid option.");
+				System.out.println("Please enter a number between " + min + " and " + max + ".");
 			else
 				isValid = true;
 		}
