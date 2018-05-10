@@ -1,16 +1,44 @@
 package midtermproject;
 
 public class Grid {
-	
-	
-	
-	int arr[][] sweep = new int[3][3];
-	sweep [0] = new int[10];
-	sweep 0 = new int [][];
 
-	
-	for(int i = 0; i < rendered.length; i++) {
-    for(int j = 0; j < rendered[i].length; j++)
-        rendered[i][j] = false;
-	}
+	// hard coated test
+	public final boolean[][] secret =
+
+			{ { false, false, false }, { false, true, true }, { true, true, false } };
+
+	/*
+	 * public boolean [][] random; public int mineCount;
+	 * 
+	 * 
+	 * 
+	 * public boolean[][] getRandom() { return random; }
+	 * 
+	 * 
+	 * 
+	 * public void setRandom(boolean[][] random) { this.random = random; }
+	 * 
+	 * 
+	 * 
+	 * public int getMineCount() { return mineCount; }
+	 * 
+	 * 
+	 * 
+	 * public void setMineCount(int mineCount) { this.mineCount = mineCount; }
+	 * 
+	 * 
+	 * 
+	 * public Grid(boolean[][] random, int mineCount) { super(); this.random =
+	 * random; this.mineCount = mineCount;
+	 * 
+	 * 
+	 * } public static Grid setBombs(Grid random){
+	 * 
+	 * return random; }
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 }
