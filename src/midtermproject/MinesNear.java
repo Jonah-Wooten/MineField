@@ -2,7 +2,7 @@ package midtermproject;
 
 public class MinesNear {
 
-	public int calculateMinesNear(boolean mines[][], int x, int y) {
+	public static int calculateMinesNear(boolean mines[][], int x, int y) {
 		int minesNear = 0;
 		int rows = mines.length;
 		int columns = mines[0].length;
