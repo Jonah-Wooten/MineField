@@ -1,3 +1,4 @@
+package midtermproject;
 import java.util.Scanner;
 
 public class MainApp {
