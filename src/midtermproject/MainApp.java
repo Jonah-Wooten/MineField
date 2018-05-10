@@ -1,3 +1,4 @@
+package midtermproject;
 import java.util.Scanner;
 
 public class MainApp {
@@ -23,32 +24,36 @@ public class MainApp {
 
 		while (input != 4) {
 			if (input == 1) {
-				System.out.println("You've selected 3x3.");
+				System.out.println("You've selected a 3x3 grid: ");
 				max = 3;
 			}
 			if (input == 2) {
-				System.out.println("You've selected 4x4.");
+				System.out.println("You've selected a 4x4 grid: ");
 				max = 4;
 			}
 			if (input == 3) {
-				System.out.println("You've selected 5x5.");
+				System.out.println("You've selected a 5x5 grid: ");
 				max = 5;
 			}
 			if (input == 4) {
 				System.out.println("Goodbye!");
 			}
 
-			// display grid here
+			System.out.println();
+			Display.renderGrid(max, max);	//display grid
+			System.out.println();
+			System.out.println();
 
-			fu = Validator.getString(scan, "Would you like to flag a mine or uncover a cell? (f/u): ");
+
+			fu = Validator.getString(scan, "Would you like to (f)flag a mine or (u)uncover a cell?  ");
 
 			if (fu.equalsIgnoreCase("f")) {
-				System.out.println("You've selected flag a cell.  Which cell would you like to flag?");
+				System.out.println("You've chosen to flag a cell.  Which cell would you like to flag?");
 				row = Validator.getInt(scan, "Enter row(x): ", 1, max);
 				column = Validator.getInt(scan, "Enter column(y): ", 1, max);
 				input = 4;
 			} else if (fu.equalsIgnoreCase("u")) {
-				System.out.println("You've selected uncover a cell.  Which cell would you like to uncover?");
+				System.out.println("You've chosen to uncover a cell.  Which cell would you like to uncover?");
 				row = Validator.getInt(scan, "Enter row(x): ", 1, max);
 				column = Validator.getInt(scan, "Enter column(y): ", 1, max);
 				input = 4;
