@@ -10,9 +10,16 @@ package midtermproject;
 public class Grid {
 
 	// hard coated test
-	public final static boolean[][] secret =
+	public final boolean[][] secret =
 
 			{ { false, false, false }, { false, true, true }, { true, true, false } };
+
+	public final boolean[][] secret2 = { { true, true, true, false }, { true, false, true, false },
+			{ false, true, true, false }, { false, true, false, true } };
+
+	public final boolean[][] secret3 = { { false, false, true, false, false }, { true, true, false, true, true },
+			{ true, false, true, false, true }, { false, true, false, true, false },
+			{ true, true, true, false, false } };
 
 	public boolean[][] randomGrid;
 	public int mineCount;
@@ -93,10 +100,10 @@ public class Grid {
 
 	}
 
-	public static boolean [][] setBombs2(boolean [][] boom, int mineCount) {
+	public static boolean[][] setBombs2(boolean[][] boom, int mineCount) {
 		int x = boom.length;
 		int y = boom[0].length;
-	//	boom.getRandom();
+		// boom.getRandom();
 
 		// When all mines are placed, exit out of Recursive Method.
 		if (mineCount == 0) {
@@ -114,4 +121,5 @@ public class Grid {
 			}
 			return setBombs2(boom, mineCount);
 		}
-}}
+	}
+}
