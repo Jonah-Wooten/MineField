@@ -51,6 +51,8 @@ public class MainApp {
 
 			array = Grid.generateDisplay(max, max);
 
+			// gameOver(array); just here for test
+
 			while (true) {
 				System.out.println();
 				Display.renderGrid(array); // display grid
@@ -101,6 +103,18 @@ public class MainApp {
 			return "!";
 		} else
 			return Integer.toString(i);
+
+	}
+
+	public static void gameOver(String[][] temp) {
+		Display.clearScreen();
+		System.out.println("Game Over!");
+		for (int i = 0; i < temp.length; i++) {
+			for (int j = 0; j < temp[0].length; j++) {
+				temp[i][j] = revealMine(i, j);
+			}
+		}
+		Display.renderGrid(temp);
 
 	}
 }
