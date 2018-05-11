@@ -18,7 +18,9 @@ public class MainApp {
 		int row;
 		int column;
 		int max = 0; // integer used to narrow row and column selection
-
+		
+		String[][] array;
+				
 		System.out.println("Welcome to minefield!");
 
 		System.out.println("Please select a minefield size:");
@@ -47,27 +49,32 @@ public class MainApp {
 				System.out.println("Goodbye!");
 			}
 
+			while(true) {
 			System.out.println();
-			Display.renderGrid(max, max);	//display grid
+			array = Grid.generateDisplay(max, max);
+			Display.renderGrid(array);	//display grid
 			System.out.println();
 			System.out.println();
 
 
 			fu = Validator.getString(scan, "Would you like to (f)flag a mine or (u)uncover a cell?  ");
 
+
 			if (fu.equalsIgnoreCase("f")) {
 				System.out.println("You've chosen to flag a cell.  Which cell would you like to flag?");
 				row = Validator.getInt(scan, "Enter row(x): ", 1, max);
 				column = Validator.getInt(scan, "Enter column(y): ", 1, max);
+				Display.clearScreen();
 				input = 4;
 			} else if (fu.equalsIgnoreCase("u")) {
 				System.out.println("You've chosen to uncover a cell.  Which cell would you like to uncover?");
 				row = Validator.getInt(scan, "Enter row(x): ", 1, max);
 				column = Validator.getInt(scan, "Enter column(y): ", 1, max);
+				Display.clearScreen();
 				input = 4;
 			} else {
 				System.out.println("Invalid selection.");
-			}
+			}}
 
 		}
 		System.out.println("Goodbye!");
