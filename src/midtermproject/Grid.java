@@ -1,5 +1,7 @@
 package midtermproject;
 
+import java.util.Arrays;
+
 /*
  * 	Grand Circus Java Bootcamp
  * 		April 2018 Cohort
@@ -100,26 +102,37 @@ public class Grid {
 
 	}
 
-	public static boolean[][] setBombs2(boolean[][] boom, int mineCount) {
-		int x = boom.length;
-		int y = boom[0].length;
-		// boom.getRandom();
-
-		// When all mines are placed, exit out of Recursive Method.
-		if (mineCount == 0) {
-
-			return boom;
-		} else {
-			// generate a random xy coordinant for a random Array
-			int rx = (int) Math.random() * x;
-			int ry = (int) Math.random() * y;
-			//
-			if (boom[rx][ry] == false) {
-				boom[rx][ry] = true;
-				mineCount--;
-
+	public static void main(String[] args);{
+		boolean [][] test;
+		boolean [][] pleaseWork = new boolean[3][3];
+		pleaseWork = setBoms3(3,3,4);
+		
+		for(boolean)[]row: pleaseWork){
+			System.out.println(Arrays.toString(row));
+		}
+		public static boolean[][] setBombs3(int x, int y, int mineCount){
+			
+			boolean[][] temp = new boolean [x][y];
+			ArrayList<Boolean> bombScrable = new ArrayList<>();
+			
+			for(int i = 0; i < mineCount; i++) {
+				bombScramble.add(true);
+				
+				int notBomb = x * y - mineCount;
+				
+				for(int i =0; i < notBomb; i++) {
+					bombScramble.add(false);
+					
+					Collection.shuggle(bombScramble);
+					
+					int index = 0;
+					for (int i = 0; i < x; i++);{
+						temp[i][j] = bombScramble.get(index++);
+					}
+				}
+				return temp;
 			}
-			return setBombs2(boom, mineCount);
+			
 		}
 	}
 }
