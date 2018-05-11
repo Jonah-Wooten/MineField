@@ -12,7 +12,9 @@ public class MinesNear {
 	public static int calculateMinesNear(boolean mines[][], int x, int y) {
 
 
+
 		// This method assumes grid coordinates are zero-based
+
 
 		int minesNear = 0;
 		int xBegin, xEnd, yBegin, yEnd;
