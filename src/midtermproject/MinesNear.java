@@ -10,11 +10,10 @@ package midtermproject;
 public class MinesNear {
 
 	public static int calculateMinesNear(boolean mines[][], int x, int y) {
-<<<<<<< HEAD
+
 
 		// This method assumes grid coordinates are zero-based
-=======
->>>>>>> a5a8b2855c10b5b85f6a9c7b02b251dbd1da620f
+
 		int minesNear = 0;
 		int xBegin, xEnd, yBegin, yEnd;
 
