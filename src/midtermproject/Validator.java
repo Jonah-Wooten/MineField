@@ -1,4 +1,12 @@
 package midtermproject;
+
+/*
+ * 	Grand Circus Java Bootcamp
+ * 		April 2018 Cohort
+ * 		Midterm Project - Minefield
+ * 			John Aoraha, Tim Pieniazek, Victoria Rush, Jonah Wooten
+ * 			https://github.com/Jonah-Wooten/MineField
+ */
 import java.util.Scanner;
 
 public class Validator {
