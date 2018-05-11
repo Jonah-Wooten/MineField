@@ -59,11 +59,13 @@ public class MainApp {
 				System.out.println("You've chosen to flag a cell.  Which cell would you like to flag?");
 				row = Validator.getInt(scan, "Enter row(x): ", 1, max);
 				column = Validator.getInt(scan, "Enter column(y): ", 1, max);
+				Display.clearScreen();
 				input = 4;
 			} else if (fu.equalsIgnoreCase("u")) {
 				System.out.println("You've chosen to uncover a cell.  Which cell would you like to uncover?");
 				row = Validator.getInt(scan, "Enter row(x): ", 1, max);
 				column = Validator.getInt(scan, "Enter column(y): ", 1, max);
+				Display.clearScreen();
 				input = 4;
 			} else {
 				System.out.println("Invalid selection.");
