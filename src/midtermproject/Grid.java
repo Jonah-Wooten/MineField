@@ -10,7 +10,7 @@ package midtermproject;
 public class Grid {
 
 	// hard coated test
-	public final boolean[][] secret =
+	public final static boolean[][] secret =
 
 			{ { false, false, false }, { false, true, true }, { true, true, false } };
 
@@ -114,4 +114,4 @@ public class Grid {
 			}
 			return setBombs2(boom, mineCount);
 		}
-}
+}}
