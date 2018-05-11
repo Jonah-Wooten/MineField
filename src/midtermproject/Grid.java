@@ -1,6 +1,7 @@
 package midtermproject;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /*
  * 	Grand Circus Java Bootcamp
@@ -12,14 +13,14 @@ import java.util.Arrays;
 public class Grid {
 
 	// hard coated test
-	public final boolean[][] secret =
+	public final static boolean[][] secret =
 
 			{ { false, false, false }, { false, true, true }, { true, true, false } };
 
-	public final boolean[][] secret2 = { { true, true, true, false }, { true, false, true, false },
+	public final static boolean[][] secret2 = { { true, true, true, false }, { true, false, true, false },
 			{ false, true, true, false }, { false, true, false, true } };
 
-	public final boolean[][] secret3 = { { false, false, true, false, false }, { true, true, false, true, true },
+	public final static boolean[][] secret3 = { { false, false, true, false, false }, { true, true, false, true, true },
 			{ true, false, true, false, true }, { false, true, false, true, false },
 			{ true, true, true, false, false } };
 
@@ -102,37 +103,28 @@ public class Grid {
 
 	}
 
-	public static void main(String[] args);{
-		boolean [][] test;
-		boolean [][] pleaseWork = new boolean[3][3];
-		pleaseWork = setBoms3(3,3,4);
-		
-		for(boolean)[]row: pleaseWork){
-			System.out.println(Arrays.toString(row));
+	public static boolean[][] setBombs3(int x, int y, int mineCount) {
+
+		boolean[][] temp = new boolean[x][y];
+		ArrayList<Boolean> bombScramble = new ArrayList<>();
+
+		for (int i = 0; i < mineCount; i++) {
+			bombScramble.add(true);
 		}
-		public static boolean[][] setBombs3(int x, int y, int mineCount){
-			
-			boolean[][] temp = new boolean [x][y];
-			ArrayList<Boolean> bombScrable = new ArrayList<>();
-			
-			for(int i = 0; i < mineCount; i++) {
-				bombScramble.add(true);
-				
-				int notBomb = x * y - mineCount;
-				
-				for(int i =0; i < notBomb; i++) {
-					bombScramble.add(false);
-					
-					Collection.shuggle(bombScramble);
-					
-					int index = 0;
-					for (int i = 0; i < x; i++);{
-						temp[i][j] = bombScramble.get(index++);
-					}
-				}
-				return temp;
+		int notBomb = x * y - mineCount;
+
+		for (int i = 0; i < notBomb; i++) {
+			bombScramble.add(false);
+		}
+		Collections.shuffle(bombScramble);
+
+		int index = 0;
+		for (int i = 0; i < x; i++) {
+			for (int j = 0; j < y; j++) {
+				temp[i][j] = bombScramble.get(index++);
 			}
-			
 		}
+		return temp;
 	}
+
 }
