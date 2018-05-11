@@ -16,17 +16,15 @@ public class Grid {
 
 	public boolean[][] randomGrid;
 	public int mineCount;
-	
+
 	public String[][] displayGrid;
-	
 
 	public Grid(boolean[][] random, int mineCount) {
 		super();
 		this.randomGrid = random;
-		this.mineCount = mineCount;		
+		this.mineCount = mineCount;
 	}
-	
-		
+
 	public Grid(String[][] displayGrid) {
 		super();
 		this.displayGrid = displayGrid;
@@ -34,9 +32,9 @@ public class Grid {
 
 	public static boolean[][] generateRandom(int x, int y) {
 		return new boolean[x][y];
-		
+
 	}
-	
+
 	public static String[][] generateDisplay(int x, int y) {
 		String[][] temp = new String[x][y];
 		for (int i = 0; i < x; i++) {
@@ -46,7 +44,6 @@ public class Grid {
 		}
 		return temp;
 	}
-
 
 	public boolean[][] getRandom() {
 		return randomGrid;
@@ -63,7 +60,7 @@ public class Grid {
 	public void setMineCount(int mineCount) {
 		this.mineCount = mineCount;
 	}
-	
+
 	public String[][] getDisplayGrid() {
 		return displayGrid;
 	}
@@ -93,6 +90,28 @@ public class Grid {
 			}
 			return setBombs(g);
 		}
+
 	}
 
+	public static boolean [][] setBombs2(boolean [][] boom, int mineCount) {
+		int x = boom.length;
+		int y = boom[0].length;
+	//	boom.getRandom();
+
+		// When all mines are placed, exit out of Recursive Method.
+		if (mineCount == 0) {
+
+			return boom;
+		} else {
+			// generate a random xy coordinant for a random Array
+			int rx = (int) Math.random() * x;
+			int ry = (int) Math.random() * y;
+			//
+			if (boom[rx][ry] == false) {
+				boom[rx][ry] = true;
+				mineCount--;
+
+			}
+			return setBombs2(boom, mineCount);
+		}
 }
