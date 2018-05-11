@@ -11,21 +11,23 @@ public class Display {
 
 				// first row displays " " + 1 to y
 				if (i == 0 && j == 0) {
-					System.out.print(" ");
+					System.out.print("  ");
 
 				} else if (i == 0) {
-					System.out.print(j);
+					System.out.print(" " + j);
 					
 				// following rows display x + "OOOO..."
 				} else if (j == 0) {
-					System.out.print("\n" + i);
+					System.out.print("\n " + i);
 					
 				} else {
-				System.out.print("O");
+				System.out.print(" O");
 				
 				}
 			}
 
 		}
+		
+		System.out.println();
 	}
 }
