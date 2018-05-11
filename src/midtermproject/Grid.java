@@ -9,6 +9,24 @@ public class Grid {
 
 	public boolean[][] random;
 	public int mineCount;
+	
+	public String[][] displayGrid;
+	
+
+	public Grid(boolean[][] random, int mineCount) {
+		super();
+		this.random = random;
+		this.mineCount = mineCount;		
+	}
+	
+		
+	public Grid(String[][] displayGrid) {
+		super();
+		this.displayGrid = displayGrid;
+	}
+
+
+
 
 	public boolean[][] getRandom() {
 		return random;
@@ -25,12 +43,13 @@ public class Grid {
 	public void setMineCount(int mineCount) {
 		this.mineCount = mineCount;
 	}
+	
+	public String[][] getDisplayGrid() {
+		return displayGrid;
+	}
 
-	public Grid(boolean[][] random, int mineCount) {
-		super();
-		this.random = random;
-		this.mineCount = mineCount;
-
+	public void setDisplayGrid(String[][] displayGrid) {
+		this.displayGrid = displayGrid;
 	}
 
 	public static Grid setBombs(Grid g) {
