@@ -1,11 +1,22 @@
 package midtermproject;
 
+/*
+ * 	Grand Circus Java Bootcamp
+ * 		April 2018 Cohort
+ * 		Midterm Project - Minefield
+ * 			John Aoraha, Tim Pieniazek, Victoria Rush, Jonah Wooten
+ * 			https://github.com/Jonah-Wooten/MineField
+ */
 public class MinesNear {
 
 	public static int calculateMinesNear(boolean mines[][], int x, int y) {
+
+
+
+		// This method assumes grid coordinates are zero-based
+
+
 		int minesNear = 0;
-		int rows = mines.length;
-		int columns = mines[0].length;
 		int xBegin, xEnd, yBegin, yEnd;
 
 		// Determine if we're on an edge and set indices so we don't go outside the
@@ -15,8 +26,8 @@ public class MinesNear {
 		} else {
 			xBegin = x - 1;
 		}
-		if (x == mines.length) {
-			xEnd = mines.length;
+		if (x == mines.length - 1) {
+			xEnd = mines.length - 1;
 		} else {
 			xEnd = x + 1;
 		}
@@ -26,8 +37,8 @@ public class MinesNear {
 		} else {
 			yBegin = y - 1;
 		}
-		if (y == mines.length) {
-			yEnd = mines.length;
+		if (y == mines.length - 1) {
+			yEnd = mines.length - 1;
 		} else {
 			yEnd = y + 1;
 		}
@@ -40,12 +51,9 @@ public class MinesNear {
 			for (int i = xBegin; i <= xEnd; i++) {
 				// Cycle through columns nearby
 				for (int j = yBegin; j <= yEnd; j++) {
-					// Don't count the cell we're in
-					if (i != j) {
-						// if there's a mine, count it
-						if (mines[i][j]) {
-							minesNear++;
-						}
+					// if there's a mine, count it
+					if (mines[i][j]) {
+						minesNear++;
 					}
 				}
 			}
