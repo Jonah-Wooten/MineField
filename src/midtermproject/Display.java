@@ -1,5 +1,12 @@
 package midtermproject;
 
+/*
+ * 	Grand Circus Java Bootcamp
+ * 		April 2018 Cohort
+ * 		Midterm Project - Minefield
+ * 			John Aoraha, Tim Pieniazek, Victoria Rush, Jonah Wooten
+ * 			https://github.com/Jonah-Wooten/MineField
+ */
 public class Display {
 
 	public static void renderGrid(int x, int y) {
