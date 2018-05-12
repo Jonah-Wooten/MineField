@@ -72,7 +72,7 @@ public class MainApp {
 					row = Validator.getInt(scan, "Enter row(x): ", 1, max);
 					column = Validator.getInt(scan, "Enter column(y): ", 1, max);
 					Display.clearScreen();
-					array = toggleFlag(array, row - 1, column - 1);
+					toggleFlag(row - 1, column - 1);
 					input = 4;
 				} else if (fu.equalsIgnoreCase("u")) {
 					System.out.println("You've chosen to uncover a cell.  Which cell would you like to uncover?");
@@ -95,15 +95,13 @@ public class MainApp {
 
 	}
 
-	public static String[][] toggleFlag(String[][] tempArray, int x, int y) {
+	public static void toggleFlag(int x, int y) {
 
-		if (tempArray[x][y].equals("O")) {
-			tempArray[x][y] = "F";
-		} else if (tempArray[x][y].equals("F")) {
-			tempArray[x][y] = "O";
+		if (array[x][y].equals("O")) {
+			array[x][y] = "F";
+		} else if (array[x][y].equals("F")) {
+			array[x][y] = "O";
 		}
-		return tempArray;
-
 	}
 
 	public static String revealMine(int x, int y) {
