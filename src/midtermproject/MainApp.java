@@ -13,6 +13,8 @@ public class MainApp {
 
 	static boolean[][] bombs;
 
+	static String[][] array;
+	
 	public static void main(String[] args) {
 
 		Scanner scan = new Scanner(System.in);
@@ -22,12 +24,11 @@ public class MainApp {
 		int column;
 		int max = 0; // integer used to narrow row and column selection
 		boolean gameOver = false;
-
-		String[][] array;
+		String cont = "y";
 
 		System.out.println("Welcome to minefield!");
 
-		while (input != 4) {
+		while (cont.equalsIgnoreCase("y")) {
 			System.out.println("Please select a minefield size:");
 			System.out.println("1. 3x3");
 			System.out.println("2. 4x4");
@@ -50,6 +51,7 @@ public class MainApp {
 			}
 			if (input == 4) {
 				System.out.println("Goodbye!");
+				gameOver = true;
 			}
 
 			array = Grid.generateDisplay(max, max);
@@ -57,7 +59,7 @@ public class MainApp {
 			bombs = Grid.setBombs3(max, max, max);
 
 			// gameOver(array); //just here for test
-
+			if (input != 4) {
 			while (gameOver == false) {
 				System.out.println();
 				Display.renderGrid(array); // display grid
@@ -84,12 +86,12 @@ public class MainApp {
 					input = 4;
 				} else {
 					System.out.println("Invalid selection.");
-				}
+				}}
+				gameOver(array);
 			}
-			gameOver(array);
-			System.out.println("Goodbye!");
-
+			cont = Validator.getYesOrNo(scan, "Would you like to continue (y/n?): ");
 		}
+		System.out.println("Goodbye!");
 
 	}
 
