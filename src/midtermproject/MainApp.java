@@ -15,6 +15,8 @@ public class MainApp {
 
 	static String[][] array;
 
+	static int winCount;
+
 	public static void main(String[] args) {
 
 		Scanner scan = new Scanner(System.in);
@@ -24,6 +26,8 @@ public class MainApp {
 		int column;
 		int max = 0; // integer used to narrow row and column selection
 		String cont = "y";
+
+		int mineCount;
 
 		System.out.println("Welcome to minefield!");
 
@@ -47,21 +51,26 @@ public class MainApp {
 			}
 			if (input == 3) {
 				System.out.println("You've selected a 5x5 grid: ");
-				max = 5;
+				max = 8;
 			}
 			if (input == 4) {
-				//System.out.println("Goodbye!");
+				// System.out.println("Goodbye!");
 				gameOver = true;
 				cont = "n";
 			}
 
-			bombs = Grid.setBombs3(max, max, max);
+			mineCount = (int) (max * max / 5);
+			//mineCount = 1;
+
+			winCount = max * max - mineCount;
+
+			bombs = Grid.setBombs3(max, max, mineCount);
 
 			array = Grid.generateDisplay(max, max);
 
 			// gameOver(array); //just here for test
 			if (input != 4) {
-				while (gameOver == false) {
+				while (!gameOver && winCount > -1) {
 					System.out.println();
 					Display.renderGrid(array); // display grid
 					System.out.println();
@@ -81,7 +90,7 @@ public class MainApp {
 						column = Validator.getInt(scan, "Enter column(y): ", 1, max);
 						Display.clearScreen();
 						revealMine(row - 1, column - 1);
-						//openSurroundingFields(row -1, column -1);
+						// openSurroundingFields(row -1, column -1);
 						if (bombs[row - 1][column - 1]) {
 							gameOver = true;
 						}
@@ -89,14 +98,44 @@ public class MainApp {
 					} else {
 						System.out.println("Invalid selection.");
 					}
+
 				}
-				gameOver();
+				// where does this go?
+				if (winCount <= 0) {
+					System.out.println("\nCongratulations! You've WON!!!\n");
+					
+					Display.renderGrid(array);
+					Display.clearScreen();
+					
+					
+				}
+
+				if (gameOver) {
+					gameOver();
+				}
+
 				cont = Validator.getYesOrNo(scan, "Would you like to continue (y/n?): ");
 				System.out.println();
 			}
 		}
+
+		System.out.println();
 		System.out.println("Goodbye!");
 
+	}
+
+	// Method checks if the position in the display array is an "O"
+	// if it is, then the space hasn't been clicked before so it
+	// is safe to decrement our winCount
+	public static void decWinCount(int x, int y) {
+		// System.out.println(winCount);
+		if (array[x][y].equals("O")) {
+			winCount--;
+		}
+		//System.out.println(winCount);
+		// Display.renderGrid(array);
+		// System.out.println(winCount);
+		// System.out.println();
 	}
 
 	public static void toggleFlag(int x, int y) {
@@ -110,28 +149,38 @@ public class MainApp {
 
 	public static void revealMine(int x, int y) {
 		int i = MinesNear.calculateMinesNear(bombs, x, y);
+		 decWinCount(x, y);
 		if (i == 0) {
-			//array[x][y] = " ";
+			// array[x][y] = " ";
 			openSurroundingFields(x, y);
 		} else if (i == 9) {
 			array[x][y] = "!";
-		} else
+		} else {
 			array[x][y] = Integer.toString(i);
+		}
 
 	}
 
+	// Runs out of revealMine() if the space is " " aka zero.
+	// cycles around that spot in a 3X3 grid to reveal those spot
+	// if it finds another zero-spot (not already revealed), then it recurs itself
 	public static void openSurroundingFields(int i, int e) {
 		for (int j = i - 1; j < i + 2; j++)
 			for (int h = e - 1; h < e + 2; h++)
 				if ((j > -1) && (j < array.length) && (h > -1) && (h < array[0].length) && (array[j][h] != " ")) {
 					if (MinesNear.calculateMinesNear(bombs, j, h) == 0) {
+						 decWinCount(j, h);
 						array[j][h] = " ";
 						openSurroundingFields(j, h);
-					} else if (MinesNear.calculateMinesNear(bombs, j, h) != 9)
-			               array[j][h] = Integer.toString(MinesNear.calculateMinesNear(bombs, j, h)); 
+					} else if (MinesNear.calculateMinesNear(bombs, j, h) != 9) {
+						 decWinCount(j, h);
+						array[j][h] = Integer.toString(MinesNear.calculateMinesNear(bombs, j, h));
+					}
 				}
 	}
 
+	// This means you lost.. =(
+	// fills out rest of gameboard, so you can know what you did wrong
 	public static void gameOver() {
 		Display.clearScreen();
 		System.out.println("Game Over!");
