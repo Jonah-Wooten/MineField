@@ -9,31 +9,33 @@ package midtermproject;
  */
 import java.util.Scanner;
 
-public class MainApp { 		static boolean[][] bombs;
+public class MainApp {
 
+	static boolean[][] bombs;
 
 	public static void main(String[] args) {
 
+		Scanner scan = new Scanner(System.in);
 		int input = 0; // input for user menu selection
 		String fu; // string to select flag or uncover
 		int row;
 		int column;
 		int max = 0; // integer used to narrow row and column selection
+		boolean gameOver = false;
 
 		String[][] array;
 
 		System.out.println("Welcome to minefield!");
 
-		System.out.println("Please select a minefield size:");
-		System.out.println("1. 3x3");
-		System.out.println("2. 4x4");
-		System.out.println("3. 5x5");
-		System.out.println("4. Exit");
-
-		Scanner scan = new Scanner(System.in);
-		input = Validator.getInt(scan, "Enter a selection: ", 1, 4);
-
 		while (input != 4) {
+			System.out.println("Please select a minefield size:");
+			System.out.println("1. 3x3");
+			System.out.println("2. 4x4");
+			System.out.println("3. 5x5");
+			System.out.println("4. Exit");
+
+			input = Validator.getInt(scan, "Enter a selection: ", 1, 4);
+
 			if (input == 1) {
 				System.out.println("You've selected a 3x3 grid: ");
 				max = 3;
@@ -50,14 +52,13 @@ public class MainApp { 		static boolean[][] bombs;
 				System.out.println("Goodbye!");
 			}
 
-			
 			array = Grid.generateDisplay(max, max);
-			
+
 			bombs = Grid.setBombs3(max, max, max);
 
-			gameOver(array); //just here for test
+			// gameOver(array); //just here for test
 
-			while (true) {
+			while (gameOver == false) {
 				System.out.println();
 				Display.renderGrid(array); // display grid
 				System.out.println();
@@ -76,15 +77,19 @@ public class MainApp { 		static boolean[][] bombs;
 					row = Validator.getInt(scan, "Enter row(x): ", 1, max);
 					column = Validator.getInt(scan, "Enter column(y): ", 1, max);
 					Display.clearScreen();
-					array[row - 1][column - 1] = revealMine(row-1, column-1);
+					array[row - 1][column - 1] = revealMine(row - 1, column - 1);
+					if (bombs[row - 1][column - 1]) {
+						gameOver = true;
+					}
 					input = 4;
 				} else {
 					System.out.println("Invalid selection.");
 				}
 			}
+			gameOver(array);
+			System.out.println("Goodbye!");
 
 		}
-		System.out.println("Goodbye!");
 
 	}
 
