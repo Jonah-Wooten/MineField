@@ -23,12 +23,12 @@ public class MainApp {
 		int row;
 		int column;
 		int max = 0; // integer used to narrow row and column selection
-		boolean gameOver = false;
 		String cont = "y";
 
 		System.out.println("Welcome to minefield!");
 
 		while (cont.equalsIgnoreCase("y")) {
+			boolean gameOver = false;
 			System.out.println("Please select a minefield size:");
 			System.out.println("1. 3x3");
 			System.out.println("2. 4x4");
@@ -54,9 +54,9 @@ public class MainApp {
 				gameOver = true;
 			}
 
-			array = Grid.generateDisplay(max, max);
-
 			bombs = Grid.setBombs3(max, max, max);
+
+			array = Grid.generateDisplay(max, max);
 
 			// gameOver(array); //just here for test
 			if (input != 4) {
@@ -79,7 +79,7 @@ public class MainApp {
 					row = Validator.getInt(scan, "Enter row(x): ", 1, max);
 					column = Validator.getInt(scan, "Enter column(y): ", 1, max);
 					Display.clearScreen();
-					array[row - 1][column - 1] = revealMine(row - 1, column - 1);
+					revealMine(row - 1, column - 1);
 					if (bombs[row - 1][column - 1]) {
 						gameOver = true;
 					}
@@ -87,9 +87,10 @@ public class MainApp {
 				} else {
 					System.out.println("Invalid selection.");
 				}}
-				gameOver(array);
+				gameOver();
 			}
 			cont = Validator.getYesOrNo(scan, "Would you like to continue (y/n?): ");
+			System.out.println();
 		}
 		System.out.println("Goodbye!");
 
@@ -104,26 +105,27 @@ public class MainApp {
 		}
 	}
 
-	public static String revealMine(int x, int y) {
+	public static void revealMine(int x, int y) {
 		int i = MinesNear.calculateMinesNear(bombs, x, y);
 		if (i == 0) {
-			return " ";
+			array[x][y] = "";
 		} else if (i == 9) {
-			return "!";
+			array[x][y] = "!";
 		} else
-			return Integer.toString(i);
+			array[x][y] = Integer.toString(i);
 
 	}
 
-	public static void gameOver(String[][] temp) {
+	public static void gameOver() {
 		Display.clearScreen();
 		System.out.println("Game Over!");
-		for (int i = 0; i < temp.length; i++) {
-			for (int j = 0; j < temp[0].length; j++) {
-				temp[i][j] = revealMine(i, j);
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array[0].length; j++) {
+				revealMine(i, j);
 			}
 		}
-		Display.renderGrid(temp);
+		Display.renderGrid(array);
+		System.out.println();
 
 	}
 }

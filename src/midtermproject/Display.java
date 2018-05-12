@@ -68,7 +68,7 @@ public class Display {
 	
 	
 	public static void clearScreen() {
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 2; i++) {
 			System.out.println();
 		}
 	}
