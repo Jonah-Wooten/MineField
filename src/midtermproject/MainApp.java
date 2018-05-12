@@ -9,7 +9,8 @@ package midtermproject;
  */
 import java.util.Scanner;
 
-public class MainApp {
+public class MainApp { 		static boolean[][] bombs;
+
 
 	public static void main(String[] args) {
 
@@ -49,9 +50,12 @@ public class MainApp {
 				System.out.println("Goodbye!");
 			}
 
+			
 			array = Grid.generateDisplay(max, max);
+			
+			bombs = Grid.setBombs3(max, max, max);
 
-			// gameOver(array); just here for test
+			gameOver(array); //just here for test
 
 			while (true) {
 				System.out.println();
@@ -96,7 +100,7 @@ public class MainApp {
 	}
 
 	public static String revealMine(int x, int y) {
-		int i = MinesNear.calculateMinesNear(Grid.secret, x, y);
+		int i = MinesNear.calculateMinesNear(bombs, x, y);
 		if (i == 0) {
 			return " ";
 		} else if (i == 9) {
