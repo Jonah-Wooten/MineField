@@ -108,7 +108,7 @@ public class MainApp {
 	public static void revealMine(int x, int y) {
 		int i = MinesNear.calculateMinesNear(bombs, x, y);
 		if (i == 0) {
-			array[x][y] = "";
+			array[x][y] = " ";
 		} else if (i == 9) {
 			array[x][y] = "!";
 		} else
