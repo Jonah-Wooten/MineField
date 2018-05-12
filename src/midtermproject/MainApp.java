@@ -14,7 +14,7 @@ public class MainApp {
 	static boolean[][] bombs;
 
 	static String[][] array;
-	
+
 	public static void main(String[] args) {
 
 		Scanner scan = new Scanner(System.in);
@@ -50,8 +50,9 @@ public class MainApp {
 				max = 5;
 			}
 			if (input == 4) {
-				System.out.println("Goodbye!");
+				//System.out.println("Goodbye!");
 				gameOver = true;
+				cont = "n";
 			}
 
 			bombs = Grid.setBombs3(max, max, max);
@@ -60,37 +61,39 @@ public class MainApp {
 
 			// gameOver(array); //just here for test
 			if (input != 4) {
-			while (gameOver == false) {
-				System.out.println();
-				Display.renderGrid(array); // display grid
-				System.out.println();
+				while (gameOver == false) {
+					System.out.println();
+					Display.renderGrid(array); // display grid
+					System.out.println();
 
-				fu = Validator.getString(scan, "Would you like to (f)flag a mine or (u)uncover a cell?  ");
+					fu = Validator.getString(scan, "Would you like to (f)flag a mine or (u)uncover a cell?  ");
 
-				if (fu.equalsIgnoreCase("f")) {
-					System.out.println("You've chosen to flag a cell.  Which cell would you like to flag?");
-					row = Validator.getInt(scan, "Enter row(x): ", 1, max);
-					column = Validator.getInt(scan, "Enter column(y): ", 1, max);
-					Display.clearScreen();
-					toggleFlag(row - 1, column - 1);
-					input = 4;
-				} else if (fu.equalsIgnoreCase("u")) {
-					System.out.println("You've chosen to uncover a cell.  Which cell would you like to uncover?");
-					row = Validator.getInt(scan, "Enter row(x): ", 1, max);
-					column = Validator.getInt(scan, "Enter column(y): ", 1, max);
-					Display.clearScreen();
-					revealMine(row - 1, column - 1);
-					if (bombs[row - 1][column - 1]) {
-						gameOver = true;
+					if (fu.equalsIgnoreCase("f")) {
+						System.out.println("You've chosen to flag a cell.  Which cell would you like to flag?");
+						row = Validator.getInt(scan, "Enter row(x): ", 1, max);
+						column = Validator.getInt(scan, "Enter column(y): ", 1, max);
+						Display.clearScreen();
+						toggleFlag(row - 1, column - 1);
+						input = 4;
+					} else if (fu.equalsIgnoreCase("u")) {
+						System.out.println("You've chosen to uncover a cell.  Which cell would you like to uncover?");
+						row = Validator.getInt(scan, "Enter row(x): ", 1, max);
+						column = Validator.getInt(scan, "Enter column(y): ", 1, max);
+						Display.clearScreen();
+						revealMine(row - 1, column - 1);
+						//openSurroundingFields(row -1, column -1);
+						if (bombs[row - 1][column - 1]) {
+							gameOver = true;
+						}
+						input = 4;
+					} else {
+						System.out.println("Invalid selection.");
 					}
-					input = 4;
-				} else {
-					System.out.println("Invalid selection.");
-				}}
+				}
 				gameOver();
+				cont = Validator.getYesOrNo(scan, "Would you like to continue (y/n?): ");
+				System.out.println();
 			}
-			cont = Validator.getYesOrNo(scan, "Would you like to continue (y/n?): ");
-			System.out.println();
 		}
 		System.out.println("Goodbye!");
 
@@ -108,12 +111,25 @@ public class MainApp {
 	public static void revealMine(int x, int y) {
 		int i = MinesNear.calculateMinesNear(bombs, x, y);
 		if (i == 0) {
-			array[x][y] = " ";
+			//array[x][y] = " ";
+			openSurroundingFields(x, y);
 		} else if (i == 9) {
 			array[x][y] = "!";
 		} else
 			array[x][y] = Integer.toString(i);
 
+	}
+
+	public static void openSurroundingFields(int i, int e) {
+		for (int j = i - 1; j < i + 2; j++)
+			for (int h = e - 1; h < e + 2; h++)
+				if ((j > -1) && (j < array.length) && (h > -1) && (h < array[0].length) && (array[j][h] != " ")) {
+					if (MinesNear.calculateMinesNear(bombs, j, h) == 0) {
+						array[j][h] = " ";
+						openSurroundingFields(j, h);
+					} else if (MinesNear.calculateMinesNear(bombs, j, h) != 9)
+			               array[j][h] = Integer.toString(MinesNear.calculateMinesNear(bombs, j, h)); 
+				}
 	}
 
 	public static void gameOver() {
