@@ -27,7 +27,8 @@ public class Display {
 					
 				// following rows display x + "OOOO..."
 				} else if (j == 0) {
-					System.out.print("\n " + i);
+					System.out.println();
+					System.out.print(String.format("%2s", i));
 					
 				} else {
 									

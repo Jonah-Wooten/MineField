@@ -18,7 +18,9 @@ public class MainApp {
 	static String[][] array;
 	// Keeps track of play determine the win condition
 	static int winCount;
-	static final String BLANK_CELL = "O";
+	static final String BLANK_CELL = "-";
+	static final String BOMB_CELL = "!";
+	static final String FLAG_CELL = "F";
 
 	public static void main(String[] args) {
 
@@ -38,8 +40,8 @@ public class MainApp {
 			boolean gameOver = false;
 			System.out.println("Please select a minefield size:");
 			System.out.println("1. 3x3");
-			System.out.println("2. 4x4");
-			System.out.println("3. 5x5");
+			System.out.println("2. 6x6");
+			System.out.println("3. 10x10");
 			System.out.println("4. Exit");
 
 			input = Validator.getInt(scan, "Enter a selection: ", 1, 4);
@@ -49,12 +51,12 @@ public class MainApp {
 				max = 3;
 			}
 			if (input == 2) {
-				System.out.println("You've selected a 4x4 grid: ");
-				max = 4;
+				System.out.println("You've selected a 6x6 grid: ");
+				max = 6;
 			}
 			if (input == 3) {
-				System.out.println("You've selected a 5x5 grid: ");
-				max = 8;
+				System.out.println("You've selected a 10x10 grid: ");
+				max = 10;
 			}
 			if (input == 4) {
 
@@ -94,7 +96,7 @@ public class MainApp {
 						Display.clearScreen();
 
 						// Don't step on a flagged mine
-						if (!array[row - 1][column - 1].equals("F")) {
+						if (!array[row - 1][column - 1].equals(FLAG_CELL)) {
 							revealMine(row - 1, column - 1);
 							if (bombs[row - 1][column - 1]) {
 								gameOver = true;
@@ -140,8 +142,8 @@ public class MainApp {
 	public static void toggleFlag(int x, int y) {
 
 		if (array[x][y].equals(BLANK_CELL)) {
-			array[x][y] = "F";
-		} else if (array[x][y].equals("F")) {
+			array[x][y] = FLAG_CELL;
+		} else if (array[x][y].equals(FLAG_CELL)) {
 			array[x][y] = BLANK_CELL;
 		}
 	}
@@ -152,7 +154,7 @@ public class MainApp {
 		if (i == 0) {
 			openSurroundingFields(x, y);
 		} else if (i == 9) {
-			array[x][y] = "!";
+			array[x][y] = BOMB_CELL;
 		} else {
 			array[x][y] = Integer.toString(i);
 		}
