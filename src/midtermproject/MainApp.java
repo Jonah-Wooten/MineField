@@ -91,8 +91,11 @@ public class MainApp {
 						row = Validator.getInt(scan, "Enter row(x): ", 1, max);
 						column = Validator.getInt(scan, "Enter column(y): ", 1, max);
 						Display.clearScreen();
-						revealMine(row - 1, column - 1);
-						// openSurroundingFields(row -1, column -1);
+
+						// Don't step on a flagged mine
+						if (!array[row - 1][column - 1].equals("F")) {
+							revealMine(row - 1, column - 1);
+						}
 						if (bombs[row - 1][column - 1]) {
 							gameOver = true;
 						}
@@ -128,14 +131,9 @@ public class MainApp {
 	// if it is, then the space hasn't been clicked before so it
 	// is safe to decrement our winCount
 	public static void decWinCount(int x, int y) {
-		// System.out.println(winCount);
 		if (array[x][y].equals("O")) {
 			winCount--;
 		}
-		// System.out.println(winCount);
-		// Display.renderGrid(array);
-		// System.out.println(winCount);
-		// System.out.println();
 	}
 
 	public static void toggleFlag(int x, int y) {
@@ -151,7 +149,6 @@ public class MainApp {
 		int i = MinesNear.calculateMinesNear(bombs, x, y);
 		decWinCount(x, y);
 		if (i == 0) {
-			// array[x][y] = " ";
 			openSurroundingFields(x, y);
 		} else if (i == 9) {
 			array[x][y] = "!";

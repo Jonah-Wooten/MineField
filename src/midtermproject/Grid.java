@@ -79,30 +79,7 @@ public class Grid {
 		this.displayGrid = displayGrid;
 	}
 
-//	public static Grid setBombs(Grid g) {
-//		int x = g.getRandom().length;
-//		int y = g.getRandom()[0].length;
-//		g.getRandom();
-//
-//		// When all mines are placed, exit out of Recursive Method.
-//		if (g.mineCount == 0) {
-//
-//			return g;
-//		} else {
-//			// generate a random xy coordinant for a random Array
-//			int rx = (int) Math.random() * x;
-//			int ry = (int) Math.random() * y;
-//			//
-//			if (g.getRandom()[rx][ry] == false) {
-//				g.getRandom()[rx][ry] = true;
-//				g.mineCount--;
-//
-//			}
-//			return setBombs(g);
-//		}
-//
-//	}
-//
+
 	public static boolean[][] setBombs3(int x, int y, int mineCount) {
 
 		boolean[][] temp = new boolean[x][y];
