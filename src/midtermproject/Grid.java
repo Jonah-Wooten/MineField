@@ -37,7 +37,7 @@ public class Grid {
 		String[][] temp = new String[x][y];
 		for (int i = 0; i < x; i++) {
 			for (int j = 0; j < y; j++) {
-				temp[i][j] = "O";
+				temp[i][j] = MainApp.BLANK_CELL;
 			}
 		}
 		return temp;

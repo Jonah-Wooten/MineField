@@ -181,7 +181,7 @@ public class MainApp {
 	// fills out rest of gameboard, so you can know what you did wrong
 	public static void gameOver() {
 		Display.clearScreen();
-		System.out.println("Game Over!");
+		System.out.println("Game Over! Oh no, you hit a mine!");
 		for (int i = 0; i < array.length; i++) {
 			for (int j = 0; j < array[0].length; j++) {
 				revealMine(i, j);
