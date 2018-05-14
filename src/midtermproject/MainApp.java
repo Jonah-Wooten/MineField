@@ -29,50 +29,32 @@ public class MainApp {
 		String fu; // User to select flag or uncover
 		int row; // User selection to uncover or flag a cell
 		int column; // User selection to uncover or flag a cell
-		int max = 0; // integer used to define maximum row and column size
+		int gridSize = 0; // integer used to define maximum row and column size
 		String cont = "y"; // User input to play another game or end
 
 		int mineCount; // Number of mines placed - used to determine win condition
+
+		Menu menu = new Menu();
 
 		System.out.println("Welcome to minefield!");
 
 		while (cont.equalsIgnoreCase("y")) {
 			boolean gameOver = false;
-			System.out.println("Please select a minefield size:");
-			System.out.println("1. 3x3");
-			System.out.println("2. 6x6");
-			System.out.println("3. 10x10");
-			System.out.println("4. Exit");
+			menu.input(scan);
+			gridSize = Menu.getGridSize();
+			cont = Menu.getCont();
+			input = Menu.getInput();
 
-			input = Validator.getInt(scan, "Enter a selection: ", 1, 4);
-
-			if (input == 1) {
-				System.out.println("You've selected a 3x3 grid: ");
-				max = 3;
-			}
-			if (input == 2) {
-				System.out.println("You've selected a 6x6 grid: ");
-				max = 6;
-			}
-			if (input == 3) {
-				System.out.println("You've selected a 10x10 grid: ");
-				max = 10;
-			}
-			if (input == 4) {
-
-				gameOver = true;
-				cont = "n";
-			}
 			// 20% of cells will be mines
-			mineCount = (int) (max * max / 5);
+			mineCount = (int) (gridSize * gridSize / 5);
 
 			// keeps track of mines flagged to determine a win
-			winCount = max * max - mineCount;
+			winCount = gridSize * gridSize - mineCount;
 			// Set play field i.e. place bombs
-			bombs = Grid.setBombs3(max, max, mineCount);
+			bombs = Grid.setBombs3(gridSize, gridSize, mineCount);
 			// Display grid shows O on unclicked cells, F on flagged cells, and space on
 			// cleared cells with no adjacent mines
-			array = Grid.generateDisplay(max, max);
+			array = Grid.generateDisplay(gridSize, gridSize);
 
 			if (input != 4) {
 				while (!gameOver && winCount >= 0) {
@@ -84,15 +66,15 @@ public class MainApp {
 
 					if (fu.equalsIgnoreCase("f")) {
 						System.out.println("You've chosen to flag a cell.  Which cell would you like to flag?");
-						row = Validator.getInt(scan, "Enter row(x): ", 1, max);
-						column = Validator.getInt(scan, "Enter column(y): ", 1, max);
+						row = Validator.getInt(scan, "Enter row(x): ", 1, gridSize);
+						column = Validator.getInt(scan, "Enter column(y): ", 1, gridSize);
 						Display.clearScreen();
 						toggleFlag(row - 1, column - 1);
 						input = 4;
 					} else if (fu.equalsIgnoreCase("u")) {
 						System.out.println("You've chosen to uncover a cell.  Which cell would you like to uncover?");
-						row = Validator.getInt(scan, "Enter row(x): ", 1, max);
-						column = Validator.getInt(scan, "Enter column(y): ", 1, max);
+						row = Validator.getInt(scan, "Enter row(x): ", 1, gridSize);
+						column = Validator.getInt(scan, "Enter column(y): ", 1, gridSize);
 						Display.clearScreen();
 
 						// Don't step on a flagged mine
