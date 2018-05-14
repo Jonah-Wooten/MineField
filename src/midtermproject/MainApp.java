@@ -18,6 +18,7 @@ public class MainApp {
 	static String[][] array;
 	// Keeps track of play determine the win condition
 	static int winCount;
+	static final String BLANK_CELL = "O";
 
 	public static void main(String[] args) {
 
@@ -95,9 +96,9 @@ public class MainApp {
 						// Don't step on a flagged mine
 						if (!array[row - 1][column - 1].equals("F")) {
 							revealMine(row - 1, column - 1);
-						}
-						if (bombs[row - 1][column - 1]) {
-							gameOver = true;
+							if (bombs[row - 1][column - 1]) {
+								gameOver = true;
+							}
 						}
 						input = 4;
 					} else {
@@ -131,17 +132,17 @@ public class MainApp {
 	// if it is, then the space hasn't been clicked before so it
 	// is safe to decrement our winCount
 	public static void decWinCount(int x, int y) {
-		if (array[x][y].equals("O")) {
+		if (array[x][y].equals(BLANK_CELL)) {
 			winCount--;
 		}
 	}
 
 	public static void toggleFlag(int x, int y) {
 
-		if (array[x][y].equals("O")) {
+		if (array[x][y].equals(BLANK_CELL)) {
 			array[x][y] = "F";
 		} else if (array[x][y].equals("F")) {
-			array[x][y] = "O";
+			array[x][y] = BLANK_CELL;
 		}
 	}
 
