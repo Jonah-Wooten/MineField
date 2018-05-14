@@ -7,7 +7,6 @@ public class Menu {
 	private static int input;
 	private static String cont = "y";
 	private static int gridSize;
-	private boolean gameOver;
 
 	public Menu() {
 	}
@@ -35,7 +34,6 @@ public class Menu {
 			gridSize = 5;
 		}
 		if (input == 4) {
-//			gameOver = true;
 			cont = "n";
 		}
 	}
