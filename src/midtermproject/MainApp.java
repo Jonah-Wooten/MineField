@@ -57,7 +57,7 @@ public class MainApp {
 			array = Grid.generateDisplay(gridSize, gridSize);
 
 			if (input != 4) {
-				while (!gameOver && winCount > 0) {
+				while (!gameOver && winCount >= 0) {
 					System.out.println();
 					Display.renderGrid(array); // display grid
 					System.out.println();
@@ -109,12 +109,12 @@ public class MainApp {
 
 	public static void revealMine(int x, int y) {
 		int i = MinesNear.calculateMinesNear(bombs, x, y);
+		decWinCount(x, y);
 		if (i == 0) {
 			openSurroundingFields(x, y);
 		} else if (i == 9) {
 			array[x][y] = BOMB_CELL;
 		} else {
-			decWinCount(x, y);
 			array[x][y] = Integer.toString(i);
 		}
 
