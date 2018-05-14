@@ -11,23 +11,25 @@ import java.util.Scanner;
 
 public class MainApp {
 
+	// Global variables available to all methods in this file
+	// Hidden array of mine field
 	static boolean[][] bombs;
-
+	// Play field stores current stat of display
 	static String[][] array;
-
+	// Keeps track of play determine the win condition
 	static int winCount;
 
 	public static void main(String[] args) {
 
 		Scanner scan = new Scanner(System.in);
 		int input = 0; // input for user menu selection
-		String fu; // string to select flag or uncover
-		int row;
-		int column;
-		int max = 0; // integer used to narrow row and column selection
-		String cont = "y";
+		String fu; // User to select flag or uncover
+		int row; // User selection to uncover or flag a cell
+		int column; // User selection to uncover or flag a cell
+		int max = 0; // integer used to define maximum row and column size
+		String cont = "y"; // User input to play another game or end
 
-		int mineCount;
+		int mineCount; // Number of mines placed - used to determine win condition
 
 		System.out.println("Welcome to minefield!");
 
@@ -54,23 +56,23 @@ public class MainApp {
 				max = 8;
 			}
 			if (input == 4) {
-				// System.out.println("Goodbye!");
+
 				gameOver = true;
 				cont = "n";
 			}
-
+			// 20% of cells will be mines
 			mineCount = (int) (max * max / 5);
-			//mineCount = 1;
 
+			// keeps track of mines flagged to determine a win
 			winCount = max * max - mineCount;
-
+			// Set play field i.e. place bombs
 			bombs = Grid.setBombs3(max, max, mineCount);
-
+			// Display grid shows O on unclicked cells, F on flagged cells, and space on
+			// cleared cells with no adjacent mines
 			array = Grid.generateDisplay(max, max);
 
-			// gameOver(array); //just here for test
 			if (input != 4) {
-				while (!gameOver && winCount > -1) {
+				while (!gameOver && winCount >= 0) {
 					System.out.println();
 					Display.renderGrid(array); // display grid
 					System.out.println();
@@ -100,14 +102,12 @@ public class MainApp {
 					}
 
 				}
-				// where does this go?
+				//
 				if (winCount <= 0) {
 					System.out.println("\nCongratulations! You've WON!!!\n");
-					
 					Display.renderGrid(array);
 					Display.clearScreen();
-					
-					
+
 				}
 
 				if (gameOver) {
@@ -132,7 +132,7 @@ public class MainApp {
 		if (array[x][y].equals("O")) {
 			winCount--;
 		}
-		//System.out.println(winCount);
+		// System.out.println(winCount);
 		// Display.renderGrid(array);
 		// System.out.println(winCount);
 		// System.out.println();
@@ -149,7 +149,7 @@ public class MainApp {
 
 	public static void revealMine(int x, int y) {
 		int i = MinesNear.calculateMinesNear(bombs, x, y);
-		 decWinCount(x, y);
+		decWinCount(x, y);
 		if (i == 0) {
 			// array[x][y] = " ";
 			openSurroundingFields(x, y);
@@ -169,11 +169,11 @@ public class MainApp {
 			for (int h = e - 1; h < e + 2; h++)
 				if ((j > -1) && (j < array.length) && (h > -1) && (h < array[0].length) && (array[j][h] != " ")) {
 					if (MinesNear.calculateMinesNear(bombs, j, h) == 0) {
-						 decWinCount(j, h);
+						decWinCount(j, h);
 						array[j][h] = " ";
 						openSurroundingFields(j, h);
 					} else if (MinesNear.calculateMinesNear(bombs, j, h) != 9) {
-						 decWinCount(j, h);
+						decWinCount(j, h);
 						array[j][h] = Integer.toString(MinesNear.calculateMinesNear(bombs, j, h));
 					}
 				}
