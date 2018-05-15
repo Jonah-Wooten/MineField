@@ -17,17 +17,6 @@ public class Grid {
 
 	public String[][] displayGrid;
 
-	public Grid(boolean[][] random, int mineCount) {
-		super();
-		this.randomGrid = random;
-		this.mineCount = mineCount;
-	}
-
-	public Grid(String[][] displayGrid) {
-		super();
-		this.displayGrid = displayGrid;
-	}
-
 	public static boolean[][] generateRandom(int x, int y) {
 		return new boolean[x][y];
 
